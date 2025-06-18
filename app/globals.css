@@ -1,0 +1,393 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap");
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 220 10% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 220 10% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 10% 3.9%;
+    --primary: 210 100% 50%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 200 30% 85%;
+    --secondary-foreground: 220 30% 20%;
+    --muted: 210 15% 95%;
+    --muted-foreground: 220 10% 50%;
+    --accent: 195 100% 70%;
+    --accent-foreground: 220 25% 25%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 220 15% 85%;
+    --input: 220 15% 90%;
+    --ring: 210 100% 50%;
+    --radius: 0.5rem;
+    
+    /* Retro colorwave variables - Updated to blue theme */
+    --wave-primary: 210 70% 60%;
+    --wave-secondary: 200 60% 65%;
+    --wave-accent: 190 55% 70%;
+    --wave-highlight: 180 50% 75%;
+    
+    /* Custom cursor color variables - Updated to blue theme */
+    --cursor-primary: 210 100% 50%;
+    --cursor-secondary: 200 80% 55%;
+    --cursor-accent: 195 100% 70%;
+    --cursor-glow: 210 100% 50%;
+  }
+
+  .dark {
+    --background: 220 25% 5%;
+    --foreground: 220 5% 95%;
+    --card: 220 25% 8%;
+    --card-foreground: 220 5% 95%;
+    --popover: 220 25% 8%;
+    --popover-foreground: 220 5% 95%;
+    --primary: 210 100% 65%;
+    --primary-foreground: 220 25% 10%;
+    --secondary: 220 20% 15%;
+    --secondary-foreground: 220 5% 85%;
+    --muted: 220 25% 12%;
+    --muted-foreground: 220 8% 65%;
+    --accent: 195 100% 75%;
+    --accent-foreground: 220 5% 85%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 220 25% 18%;
+    --input: 220 25% 15%;
+    --ring: 210 100% 65%;
+    
+    /* Dark mode colorwave variables - Updated to blue theme */
+    --wave-primary: 210 60% 40%;
+    --wave-secondary: 200 55% 35%;
+    --wave-accent: 190 50% 30%;
+    --wave-highlight: 180 45% 25%;
+    
+    /* Dark mode cursor colors - Updated to blue theme */
+    --cursor-primary: 210 100% 65%;
+    --cursor-secondary: 200 80% 60%;
+    --cursor-accent: 195 100% 75%;
+    --cursor-glow: 210 100% 65%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    cursor: none;
+    position: relative;
+  }
+  
+  /* Custom cursor implementation */
+  .custom-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    background: hsl(var(--cursor-primary));
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    /* Removed mix-blend-mode for better performance */
+    /* Use will-change to optimize for transforms */
+    will-change: transform;
+    /* Use hardware acceleration with CSS custom properties for positioning */
+    transform: translate3d(var(--cursor-x, 0px), var(--cursor-y, 0px), 0) translate(-50%, -50%);
+    /* Faster transition with reduced property count */
+    transition: width 0.1s ease-out, height 0.1s ease-out, background 0.1s ease-out;
+  }
+  
+  /* Hide custom cursor on touch devices */
+  @media (hover: none) and (pointer: coarse) {
+    .custom-cursor {
+      display: none;
+    }
+    
+    /* Re-enable default cursors on touch devices */
+    *, *::before, *::after {
+      cursor: auto !important;
+    }
+  }
+  
+  .custom-cursor::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 8px;
+    height: 8px;
+    background: hsl(var(--cursor-secondary));
+    border-radius: 50%;
+    transform: translate3d(-50%, -50%, 0);
+    transition: width 0.1s ease-out, height 0.1s ease-out, background 0.1s ease-out;
+    will-change: transform;
+  }
+  
+  /* Cursor hover state */
+  .custom-cursor.hover {
+    width: 40px;
+    height: 40px;
+    background: transparent;
+    border: 2px solid hsl(var(--cursor-primary));
+    box-shadow: 0 0 20px hsla(var(--cursor-glow), 0.3);
+  }
+  
+  .custom-cursor.hover::before {
+    width: 4px;
+    height: 4px;
+    background: hsl(var(--cursor-primary));
+  }
+  
+  /* Cursor loading state */
+  .custom-cursor.loading {
+    width: 30px;
+    height: 30px;
+    background: transparent;
+    border: 3px solid transparent;
+    border-top: 3px solid hsl(var(--cursor-primary));
+    border-right: 3px solid hsl(var(--cursor-secondary));
+    animation: cursor-spin 0.8s linear infinite;
+  }
+  
+  .custom-cursor.loading::before {
+    width: 6px;
+    height: 6px;
+    background: hsl(var(--cursor-accent));
+    animation: cursor-pulse 0.8s ease-in-out infinite alternate;
+  }
+  
+  /* Cursor text interaction state */
+  .custom-cursor.text {
+    width: 2px;
+    height: 20px;
+    background: hsl(var(--cursor-primary));
+    border-radius: 1px;
+  }
+  
+  .custom-cursor.text::before {
+    display: none;
+  }
+  
+  /* Override default cursors */
+  *, *::before, *::after {
+    cursor: none !important;
+  }
+  
+  /* Retro colorwave background */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.03;
+    z-index: -1;
+    background: 
+      radial-gradient(circle at 20% 80%, hsl(var(--wave-primary)) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, hsl(var(--wave-secondary)) 0%, transparent 50%),
+      radial-gradient(circle at 40% 40%, hsl(var(--wave-accent)) 0%, transparent 50%),
+      radial-gradient(circle at 70% 70%, hsl(var(--wave-highlight)) 0%, transparent 50%);
+    animation: colorwave 20s ease-in-out infinite;
+  }
+}
+
+/* Pixelated elements */
+@layer components {
+  .pixel-border {
+    box-shadow: 2px 0 0 0 hsl(var(--foreground)), 0 2px 0 0 hsl(var(--foreground)), 2px 2px 0 0 hsl(var(--foreground)),
+      -2px 0 0 0 hsl(var(--foreground)), 0 -2px 0 0 hsl(var(--foreground));
+  }
+
+  .brutalist-shadow {
+    box-shadow: 4px 4px 0px 0px theme("colors.foreground");
+  }
+  
+  /* Hover effects with enhanced cursor integration */
+  .hover-glow:hover {
+    box-shadow: 0 0 20px hsla(var(--primary), 0.2);
+    transition: box-shadow 0.3s ease;
+  }
+}
+
+/* Cursor animations */
+@keyframes cursor-spin {
+  0% { transform: translate3d(var(--cursor-x, 0px), var(--cursor-y, 0px), 0) translate(-50%, -50%) rotate(0deg); }
+  100% { transform: translate3d(var(--cursor-x, 0px), var(--cursor-y, 0px), 0) translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes cursor-pulse {
+  0% { opacity: 0.6; transform: translate3d(var(--cursor-x, 0px), var(--cursor-y, 0px), 0) translate(-50%, -50%) scale(0.9); }
+  100% { opacity: 1; transform: translate3d(var(--cursor-x, 0px), var(--cursor-y, 0px), 0) translate(-50%, -50%) scale(1.1); }
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar with earthy theme */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--background));
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--primary));
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--primary-foreground));
+}
+
+/* Colorwave animation */
+@keyframes colorwave {
+  0%, 100% {
+    filter: hue-rotate(0deg) brightness(1);
+  }
+  25% {
+    filter: hue-rotate(5deg) brightness(1.1);
+  }
+  50% {
+    filter: hue-rotate(-5deg) brightness(0.9);
+  }
+  75% {
+    filter: hue-rotate(3deg) brightness(1.05);
+  }
+}
+
+/* Fade in animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Hero section animations */
+.hero-animate {
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.hero-animate-delay-1 {
+  animation: fadeInUp 0.8s ease-out 0.2s forwards;
+  opacity: 0;
+}
+
+.hero-animate-delay-2 {
+  animation: fadeInUp 0.8s ease-out 0.4s forwards;
+  opacity: 0;
+}
+
+.hero-animate-delay-3 {
+  animation: fadeInUp 0.8s ease-out 0.6s forwards;
+  opacity: 0;
+}
+
+/* Subtle gradient overlays for cards */
+.card-gradient {
+  background: linear-gradient(135deg, 
+    hsl(var(--card)) 0%, 
+    hsl(var(--muted)) 100%);
+}
+
+/* Link hover effects */
+a:hover {
+  @apply cursor-pointer;
+}
+
+button:hover {
+  @apply cursor-pointer;
+}
+
+/* Mobile responsive ghibli icon */
+@media (max-width: 768px) {
+  .mobile-hero-icon {
+    width: 200px;
+    height: 200px;
+  }
+  
+  /* Timeline mobile enhancements */
+  .timeline-mobile {
+    border-left: 2px solid hsl(var(--border));
+    margin-left: 1rem;
+    padding-left: 1.5rem;
+  }
+  
+  .timeline-mobile .timeline-card {
+    position: relative;
+  }
+  
+  .timeline-mobile .timeline-card::before {
+    content: '';
+    position: absolute;
+    left: -2rem;
+    top: 1rem;
+    width: 8px;
+    height: 8px;
+    background: hsl(var(--primary));
+    border-radius: 50%;
+    border: 2px solid hsl(var(--background));
+    box-shadow: 0 0 0 2px hsl(var(--border));
+  }
+}
+
+/* Enhanced mobile spacing and animations */
+@media (max-width: 640px) {
+  .hero-animate {
+    animation: fadeInUp 0.8s ease-out forwards;
+    opacity: 0;
+  }
+  
+  .hero-animate-delay-1 {
+    animation: fadeInUp 0.8s ease-out 0.2s forwards;
+    opacity: 0;
+  }
+  
+  .hero-animate-delay-2 {
+    animation: fadeInUp 0.8s ease-out 0.4s forwards;
+    opacity: 0;
+  }
+  
+  .hero-animate-delay-3 {
+    animation: fadeInUp 0.8s ease-out 0.6s forwards;
+    opacity: 0;
+  }
+  
+  /* Better mobile card spacing */
+  .mobile-timeline-card {
+    margin-bottom: 1.5rem;
+    border-radius: 0.75rem;
+    background: linear-gradient(135deg, 
+      hsl(var(--card)) 0%, 
+      hsl(var(--muted)/0.3) 100%);
+  }
+}
+
+/* Smooth timeline connector animations */
+@media (min-width: 768px) {
+  .timeline-connector {
+    transition: all 0.3s ease;
+  }
+  
+  .timeline-connector:hover {
+    background: hsl(var(--primary));
+    box-shadow: 0 0 8px hsla(var(--primary), 0.4);
+  }
+}

@@ -1,0 +1,90 @@
+<svg width="400" height="300" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="brainGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#8b5cf6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#7c3aed;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="documentGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f8fafc;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#e2e8f0;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="neuralGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#a855f7;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#9333ea;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="400" height="300" fill="#0f172a" rx="20"/>
+  
+  <!-- Document -->
+  <rect x="230" y="50" width="140" height="200" fill="url(#documentGradient)" rx="8" stroke="#cbd5e1" stroke-width="2"/>
+  
+  <!-- Document header -->
+  <rect x="245" y="70" width="110" height="20" fill="#8b5cf6" rx="4"/>
+  <text x="300" y="85" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="12" font-weight="bold">RESUME</text>
+  
+  <!-- Document lines with AI-generated effect -->
+  <line x1="250" y1="110" x2="350" y2="110" stroke="#64748b" stroke-width="2"/>
+  <line x1="250" y1="125" x2="340" y2="125" stroke="#64748b" stroke-width="2"/>
+  <line x1="250" y1="140" x2="330" y2="140" stroke="#a855f7" stroke-width="2"/>
+  <line x1="250" y1="155" x2="350" y2="155" stroke="#64748b" stroke-width="2"/>
+  <line x1="250" y1="170" x2="320" y2="170" stroke="#a855f7" stroke-width="2"/>
+  <line x1="250" y1="185" x2="340" y2="185" stroke="#64748b" stroke-width="2"/>
+  <line x1="250" y1="200" x2="350" y2="200" stroke="#a855f7" stroke-width="2"/>
+  <line x1="250" y1="215" x2="325" y2="215" stroke="#64748b" stroke-width="2"/>
+  
+  <!-- Brain -->
+  <g fill="url(#brainGradient)" stroke="#7c3aed" stroke-width="2">
+    <!-- Left hemisphere -->
+    <path d="M 60 120 Q 50 100, 70 90 Q 90 80, 110 90 Q 120 100, 115 120 Q 120 140, 110 150 Q 90 160, 70 150 Q 50 140, 60 120 Z"/>
+    <!-- Right hemisphere -->
+    <path d="M 115 120 Q 110 100, 130 90 Q 150 80, 170 90 Q 180 100, 175 120 Q 180 140, 170 150 Q 150 160, 130 150 Q 110 140, 115 120 Z"/>
+  </g>
+  
+  <!-- Brain neural pathways -->
+  <g stroke="url(#neuralGradient)" stroke-width="2" fill="none">
+    <path d="M 80 110 Q 90 105, 100 110 Q 110 115, 120 110"/>
+    <path d="M 85 130 Q 95 125, 105 130 Q 115 135, 125 130"/>
+    <path d="M 130 110 Q 140 105, 150 110 Q 160 115, 170 110"/>
+    <path d="M 135 130 Q 145 125, 155 130 Q 165 135, 175 130"/>
+  </g>
+  
+  <!-- Neural nodes -->
+  <circle cx="85" cy="105" r="3" fill="#a855f7"/>
+  <circle cx="120" cy="115" r="3" fill="#a855f7"/>
+  <circle cx="140" cy="105" r="3" fill="#a855f7"/>
+  <circle cx="155" cy="125" r="3" fill="#a855f7"/>
+  <circle cx="95" cy="135" r="3" fill="#a855f7"/>
+  <circle cx="145" cy="135" r="3" fill="#a855f7"/>
+  
+  <!-- AI processing effect -->
+  <g stroke="#8b5cf6" stroke-width="1" fill="none" opacity="0.6">
+    <circle cx="120" cy="125" r="40"/>
+    <circle cx="120" cy="125" r="50"/>
+    <circle cx="120" cy="125" r="60"/>
+  </g>
+  
+  <!-- Connection from brain to document -->
+  <path d="M 180 125 Q 200 120, 220 125 Q 230 125, 230 125" 
+        stroke="#8b5cf6" 
+        stroke-width="3" 
+        fill="none" 
+        stroke-dasharray="8,4"/>
+  
+  <!-- AI particles -->
+  <g fill="#a855f7" opacity="0.8">
+    <circle cx="190" cy="115" r="2"/>
+    <circle cx="205" cy="125" r="1.5"/>
+    <circle cx="215" cy="120" r="2"/>
+    <circle cx="200" cy="135" r="1"/>
+  </g>
+  
+  <!-- Sparkle effects around brain -->
+  <g stroke="#a855f7" stroke-width="2" fill="none">
+    <path d="M 45 100 L 50 105 L 45 110 L 40 105 Z"/>
+    <path d="M 195 95 L 200 100 L 195 105 L 190 100 Z"/>
+    <path d="M 55 160 L 60 165 L 55 170 L 50 165 Z"/>
+    <path d="M 185 165 L 190 170 L 185 175 L 180 170 Z"/>
+  </g>
+</svg> 
